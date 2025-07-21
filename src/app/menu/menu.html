@@ -1,0 +1,5 @@
+<div class="w-full h-full flex flex-col gap-y-3 select-none p-2 overflow-auto">
+    @for (menuItem of menuDataFiltered(menuData(), filter()); track menuItem.id;) {
+        <app-menu-item [menuItem]="menuItem" (onItemClicked)="itemClicked($event)" [filtered]="filter() !== ''"></app-menu-item>
+    }   
+</div>

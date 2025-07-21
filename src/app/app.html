@@ -1,0 +1,8 @@
+<div class="w-screen h-screen bg-slate-100 flex items-stretch">
+    <div class="w-90 h-full flex flex-col bg-amber-800">
+        <div class="h-1/10 p-2">
+            <input type="text" class="w-full bg-cyan-50 outline-none p-0.5" [(ngModel)]="filterText">
+        </div>
+        <app-menu class="flex-1 bg-cyan-800" [menuData]="menuData" [filter]="filterText"></app-menu>
+    </div>
+</div>
