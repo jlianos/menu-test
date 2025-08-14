@@ -4,7 +4,8 @@
 
         <div class="flex cursor-pointer items-center hover:scale-103" (click)="itemClicked()">
 
-            <div class="flex items-center justify-center ml-1.5" [class.hidden]="!menuItem().isFolder" [class.rotate-90]="!menuClosed()">
+            <div class="flex items-center justify-center ml-1.5 transform transition-transform duration-300 ease-in-out"
+                [class.hidden]="!menuItem().isFolder" [class.rotate-90]="!menuClosed()">
                 <fa-icon [icon]="'chevron-right'" class="text-red-400"></fa-icon>
             </div>
 
@@ -14,7 +15,8 @@
             </div>
 
             <div>
-                <p class="item-text ml-1 pr-3 text-base max-w-60 text-white overflow-hidden truncate" [title]="menuItem().text">{{menuItem().text}}</p>
+                <p class="item-text ml-1 pr-3 text-base max-w-60 text-white overflow-hidden truncate"
+                    [title]="menuItem().text">{{menuItem().text}}</p>
             </div>
 
         </div>
@@ -22,9 +24,24 @@
     </div>
 
     @if (menuItem().isFolder && menuItem().items) {
-        @for (childMenuItem of menuItem().items; track childMenuItem.id;) {
-            <app-menu-item class="ml-4" [menuItem]="childMenuItem" [class.hidden]="menuClosed()" (onItemClicked)="childClicked($event)" [filtered]="filtered()"></app-menu-item>
-        }
-    }
+        <div
+            class="pl-4 grid transition-[grid-template-rows] duration-300 ease-in-out"
+            [style.gridTemplateRows]="menuClosed() ? '0fr' : '1fr'">
 
+            <div class="overflow-hidden min-h-0">
+                <div
+                    class="flex flex-col gap-y-2 transition-opacity duration-300 ease-in-out"
+                    [style.opacity]="menuClosed() ? 0 : 1">
+
+                    @for (childMenuItem of menuItem().items; track childMenuItem.id;) {
+                        <app-menu-item
+                            [menuItem]="childMenuItem"
+                            (onItemClicked)="childClicked($event)"
+                            [filtered]="filtered()">
+                        </app-menu-item>
+                    }
+                </div>
+            </div>
+        </div>
+    }
 </div>

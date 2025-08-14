@@ -21,7 +21,7 @@ export class MenuItem {
 
 	constructor() {
 		this.iconLibrary.addIconPacks(fas);
-    
+
 		effect(() => {
 			this.menuClosed.set(!this.filtered());
 		});
