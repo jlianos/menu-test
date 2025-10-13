@@ -1,0 +1,225 @@
+<!-- Header / Toolbar -->
+<section class="flex items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-700">
+    <h1 class="text-xl font-semibold flex items-center gap-2">
+        <fa-icon [icon]="['fas','exchange-alt']"></fa-icon>
+        Transactions
+    </h1>
+
+    <div class="flex items-center gap-2">
+        <button
+            class="inline-flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800">
+            <fa-icon [icon]="['fas','file-import']"></fa-icon>
+            Import
+        </button>
+        <button
+            class="inline-flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800">
+            <fa-icon [icon]="['fas','download']"></fa-icon>
+            Export
+        </button>
+        <button
+            class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 text-white px-3 py-2 text-sm hover:bg-emerald-700">
+            <fa-icon [icon]="['fas','plus']"></fa-icon>
+            Add
+        </button>
+    </div>
+</section>
+
+<!-- Filters -->
+<section class="mt-4 rounded-xl border border-slate-200 dark:border-slate-700 p-3">
+    <div class="grid grid-cols-1 md:grid-cols-6 gap-3">
+        <!-- Search -->
+        <label
+            class="md:col-span-2 flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2">
+            <fa-icon [icon]="['fas','search']" class="shrink-0"></fa-icon>
+            <input type="text" placeholder="Search description…" class="w-full bg-transparent outline-none" />
+        </label>
+
+        <!-- Date from -->
+        <label class="flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2">
+            <fa-icon [icon]="['fas','calendar-alt']" class="shrink-0"></fa-icon>
+            <input type="date" class="w-full bg-transparent outline-none" placeholder="From" />
+        </label>
+
+        <!-- Date to -->
+        <label class="flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2">
+            <fa-icon [icon]="['fas','calendar-alt']" class="shrink-0"></fa-icon>
+            <input type="date" class="w-full bg-transparent outline-none" placeholder="To" />
+        </label>
+
+        <!-- Type -->
+        <label class="flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2">
+            <fa-icon [icon]="['fas','exchange-alt']" class="shrink-0"></fa-icon>
+            <select class="w-full bg-transparent outline-none">
+                <option value="">All types</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+        </label>
+
+        <!-- Account -->
+        <label class="flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2">
+            <fa-icon [icon]="['fas','university']" class="shrink-0"></fa-icon>
+            <select class="w-full bg-transparent outline-none">
+                <option value="">Any account</option>
+                <option>Cash</option>
+                <option>Visa **** 1234</option>
+            </select>
+        </label>
+
+        <!-- Category -->
+        <label
+            class="md:col-span-2 flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2">
+            <fa-icon [icon]="['fas','tags']" class="shrink-0"></fa-icon>
+            <select class="w-full bg-transparent outline-none">
+                <option value="">All categories</option>
+                <option>Groceries</option>
+                <option>Rent</option>
+                <option>Salary</option>
+            </select>
+        </label>
+
+        <!-- Amount min -->
+        <label class="flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2">
+            <fa-icon [icon]="['fas','sort-amount-down']" class="shrink-0"></fa-icon>
+            <input type="number" inputmode="decimal" placeholder="Min" class="w-full bg-transparent outline-none" />
+        </label>
+
+        <!-- Amount max -->
+        <label class="flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2">
+            <fa-icon [icon]="['fas','sort-amount-up']" class="shrink-0"></fa-icon>
+            <input type="number" inputmode="decimal" placeholder="Max" class="w-full bg-transparent outline-none" />
+        </label>
+
+        <!-- Clear / Apply -->
+        <div class="md:col-span-2 flex items-center justify-end gap-2">
+            <button
+                class="inline-flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800">
+                <fa-icon [icon]="['fas','eraser']"></fa-icon>
+                Clear
+            </button>
+            <button
+                class="inline-flex items-center gap-2 rounded-lg bg-slate-900 text-white px-3 py-2 text-sm hover:bg-slate-800 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-white">
+                <fa-icon [icon]="['fas','filter']"></fa-icon>
+                Apply
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Summary chips -->
+<section class="mt-4 flex flex-wrap gap-2">
+    <span
+        class="inline-flex items-center gap-2 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 px-3 py-1 text-xs">
+        <fa-icon [icon]="['fas','arrow-up']"></fa-icon>
+        Income: <strong class="font-semibold">€0.00</strong>
+    </span>
+    <span
+        class="inline-flex items-center gap-2 rounded-full bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 px-3 py-1 text-xs">
+        <fa-icon [icon]="['fas','arrow-down']"></fa-icon>
+        Expense: <strong class="font-semibold">€0.00</strong>
+    </span>
+    <span
+        class="inline-flex items-center gap-2 rounded-full bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200 px-3 py-1 text-xs">
+        <fa-icon [icon]="['fas','balance-scale']"></fa-icon>
+        Net: <strong class="font-semibold">€0.00</strong>
+    </span>
+</section>
+
+<!-- Table -->
+<section class="mt-4 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700">
+    <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+            <thead class="bg-slate-50 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300">
+                <tr>
+                    <th class="text-left px-4 py-2 font-medium">Date</th>
+                    <th class="text-left px-4 py-2 font-medium">Type</th>
+                    <th class="text-left px-4 py-2 font-medium">Category</th>
+                    <th class="text-left px-4 py-2 font-medium">Account</th>
+                    <th class="text-left px-4 py-2 font-medium">Description</th>
+                    <th class="text-right px-4 py-2 font-medium">Amount</th>
+                    <th class="px-4 py-2"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+                <!-- Example row (replace with real data later) -->
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                    <td class="px-4 py-3 whitespace-nowrap">2025-08-01</td>
+                    <td class="px-4 py-3">
+                        <span
+                            class="inline-flex items-center gap-1 rounded-full bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 px-2 py-0.5 text-[11px]">
+                            <fa-icon [icon]="['fas','arrow-down']"></fa-icon> Expense
+                        </span>
+                    </td>
+                    <td class="px-4 py-3">Groceries</td>
+                    <td class="px-4 py-3">Visa **** 1234</td>
+                    <td class="px-4 py-3">Weekly supermarket</td>
+                    <td class="px-4 py-3 text-right font-medium">€-54.20</td>
+                    <td class="px-4 py-3">
+                        <div class="flex justify-end gap-2">
+                            <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" title="Edit">
+                                <fa-icon [icon]="['fas','edit']"></fa-icon>
+                            </button>
+                            <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-rose-600"
+                                title="Delete">
+                                <fa-icon [icon]="['fas','trash']"></fa-icon>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                    <td class="px-4 py-3 whitespace-nowrap">2025-08-01</td>
+                    <td class="px-4 py-3">
+                        <span
+                            class="inline-flex items-center gap-1 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 px-2 py-0.5 text-[11px]">
+                            <fa-icon [icon]="['fas','arrow-up']"></fa-icon> Income
+                        </span>
+                    </td>
+                    <td class="px-4 py-3">Salary</td>
+                    <td class="px-4 py-3">Bank</td>
+                    <td class="px-4 py-3">Monthly paycheck</td>
+                    <td class="px-4 py-3 text-right font-medium">€2,300.00</td>
+                    <td class="px-4 py-3">
+                        <div class="flex justify-end gap-2">
+                            <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" title="Edit">
+                                <fa-icon [icon]="['fas','edit']"></fa-icon>
+                            </button>
+                            <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-rose-600"
+                                title="Delete">
+                                <fa-icon [icon]="['fas','trash']"></fa-icon>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Empty state (show when no results) -->
+                <!--
+        <tr>
+          <td colspan="7" class="px-4 py-10 text-center text-slate-500 dark:text-slate-400">
+            <div class="flex flex-col items-center gap-2">
+              <fa-icon [icon]="['fas','inbox']" class="text-2xl"></fa-icon>
+              <p>No transactions found</p>
+            </div>
+          </td>
+        </tr>
+        -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer / Pagination -->
+    <div
+        class="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 border-t border-slate-200 dark:border-slate-700">
+        <p class="text-xs text-slate-500">Showing <strong>1–2</strong> of <strong>2</strong></p>
+        <div class="flex items-center gap-1">
+            <button
+                class="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 text-sm hover:bg-slate-50 dark:hover:bg-slate-800">
+                <fa-icon [icon]="['fas','chevron-left']"></fa-icon>
+            </button>
+            <button
+                class="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 text-sm hover:bg-slate-50 dark:hover:bg-slate-800">
+                <fa-icon [icon]="['fas','chevron-right']"></fa-icon>
+            </button>
+        </div>
+    </div>
+</section>

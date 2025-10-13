@@ -37,10 +37,10 @@
     <!-- MIDDLE (scroll area) -->
     <div class="flex-1 min-h-0 w-full flex flex-col gap-y-3 select-none p-2 pb-5 overflow-auto bg-slate-900/20">
         @for (menuItem of filteredItems(); track menuItem.id;) {
-        <app-menu-item [menuItem]="menuItem" (onItemClicked)="itemClicked($event)" [filtered]="filter() !== ''">
-        </app-menu-item>
+            <app-menu-item [menuItem]="menuItem" (onItemClicked)="itemClicked($event)" [filtered]="filter() !== ''">
+            </app-menu-item>
         } @empty {
-        <div class="text-sm text-white/70 p-3">No results</div>
+            <div class="text-sm text-white/70 p-3">No results</div>
         }
     </div>
 
