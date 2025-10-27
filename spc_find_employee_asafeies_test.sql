@@ -448,7 +448,7 @@ select @dynamic_cases = string_agg(
 	', '
 )
 from employee_asafeies_scenarios
-where scenario_type = 'formula' and scenario_name = @scenario_name;
+where scenario_type = 'formula' and scenario_name in (select trim(value) from string_split(@scenario_name, ','));
 
 
 create table #final_data (
