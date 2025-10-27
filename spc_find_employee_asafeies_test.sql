@@ -488,7 +488,7 @@ set @sql = '
 		last_punch_yesterday,
 		today_punches,
 		missed_punch = '''',
-		comments = concat_ws(char(10), ' + @dynamic_cases + ', ''''),
+		comments = coalesce(trim(concat_ws(char(10), ' + @dynamic_cases + ')), ''''),
 		comments2 = '''',
 		missed_punch_today = 0,
 		missed_punch_yesterday = 0
