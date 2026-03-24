@@ -1,13 +1,4 @@
-USE [FS_TIMER_FUTURESOFT]
-GO
-/****** Object:  StoredProcedure [dbo].[spc_find_employee_asafeies_multi_dates_test]    Script Date: 08-Jul-25 3:41:42 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-ALTER   procedure [dbo].[spc_find_employee_asafeies_multi_dates_test]
+create or alter procedure [dbo].[spc_find_employee_asafeies_multi_dates_test]
 	@start_date date = null,
 	@end_date date = null,
 	@codefs nvarchar(max) = '*',

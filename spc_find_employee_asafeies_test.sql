@@ -1,18 +1,10 @@
-USE [FS_TIMER_FUTURESOFT]
-GO
-/****** Object:  StoredProcedure [dbo].[spc_find_employee_asafeies_test]    Script Date: 08-Jul-25 1:33:11 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER   procedure [dbo].[spc_find_employee_asafeies_test]
-
-@now datetime = null,
-@codefs nvarchar(max) = '*',
-@only_ergani_punches int = 0,
-@level int = 1,
-@show_no_karta int = 0,
-@scenario_name nvarchar(50) = ''
+create or alter procedure [dbo].[spc_find_employee_asafeies_test]
+	@now datetime = null,
+	@codefs nvarchar(max) = '*',
+	@only_ergani_punches int = 0,
+	@level int = 1,
+	@show_no_karta int = 0,
+	@scenario_name nvarchar(50) = ''
 --@level = 0 stats
 --@level = 1 final_data all
 --@level = 2 final_data all warning
