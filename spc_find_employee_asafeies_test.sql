@@ -4,6 +4,7 @@ create or alter procedure [dbo].[spc_find_employee_asafeies_test]
 	@only_ergani_punches int = 0,
 	@level int = 1,
 	@show_no_karta int = 0,
+	@show_wfh int = 0,
 	@scenario_name nvarchar(50) = ''
 --@level = 0 stats
 --@level = 1 final_data all
@@ -14,12 +15,13 @@ begin
 
 /*
 --Example Usage
-exec spc_find_employee_asafeies_multi_dates_test
-	@now = '20250601 15:30',
-	@codefs = '10017',
-	@only_ergani_punches = 1,
-	@level = 1,
+exec spc_find_employee_asafeies_test
+	@now = null,
+	@codefs = '*',
+	@only_ergani_punches = 0,
+	@level = 2,
 	@show_no_karta = 0,
+	@show_wfh = 0,
 	@scenario_name = 'test';
 */
 
@@ -28,8 +30,8 @@ begin
 	set @now = getdate();
 end
 
-declare @today DATE = convert(date, @now);
-declare @yesterday DATE = dateadd(day, -1, @today);
+declare @today date = convert(date, @now);
+declare @yesterday date = dateadd(day, -1, @today);
 
 drop table if exists #book_today;
 
@@ -37,6 +39,7 @@ select
 	codef,
 	epon,
 	onom,
+	prog2 = coalesce(prog2, ''),
 	convert(int, coalesce(nokarta, 0)) as nokarta,
 	case when coalesce(willwork, 0) > 0 and convert(date, mustin) = @today then mustin else null end as mustin,
 	case when coalesce(willwork, 0) > 0 and convert(date, mustout) = @today then mustout else null end as mustout,
@@ -46,7 +49,9 @@ into
 #book_today
 from f_fs_book(datediff(day, getdate(), @today), 0, @codefs)
 where 
-	(datediff(day, @today, active_to) >= 0 or active_to is null);
+	(datediff(day, @today, active_to) >= 0 or active_to is null)
+and (coalesce(prog2, '') <> 'ΕΣ' or @show_wfh = 1)
+--and (convert(int, coalesce(nokarta, 0)) <> 1 or @show_no_karta = 1);
 
 --select * from #book_today;
 
@@ -66,7 +71,10 @@ into
 from f_fs_book(datediff(day, getdate(), @yesterday), 0, @codefs)
 where 
 	(datediff(day, @yesterday, active_to) >= 0 or active_to is null)
-and (convert(date, mustout) = @today or convert(date, mustout_cont) = @today or convert(date, mustin_cont) = @today);
+and (convert(date, mustout) = @today or convert(date, mustout_cont) = @today or convert(date, mustin_cont) = @today)
+and (coalesce(prog2, '') <> 'ΕΣ' or @show_wfh = 1)
+--and (convert(int, coalesce(nokarta, 0)) <> 1 or @show_no_karta = 1);
+
 
 --select * from #book_yesterday;
 
@@ -77,6 +85,7 @@ select
 	coalesce(t.codef, y.codef) as codef,
 	coalesce(t.epon, y.epon) as epon,
 	coalesce(t.onom, y.onom) as onom,
+	t.prog2,
 	case when (t.nokarta = 1 or y.nokarta = 1) then 1 else 0 end as nokarta,
 	mustin,
 	mustout,
@@ -88,6 +97,7 @@ select
 into #book
 from #book_today t
 full join #book_yesterday y on t.codef = y.codef
+
 
 
 if @show_no_karta = 0
@@ -206,6 +216,8 @@ select
 	b.mustin_cont_yesterday,
 	b.mustout_cont_yesterday,
 	b.mustout_yesterday,
+
+	case when b.prog2 = 'ΕΣ' then 1 else 0 end as is_today_wfh,
 
 	case when last_punch_yesterday.codef is not null then last_punch_yesterday.last_punch_yesterday else '' end as last_punch_yesterday,
 	case when today_punches_agg.codef is not null then today_punches_agg.today_punches else '' end as today_punches,

@@ -5,6 +5,7 @@ create or alter procedure [dbo].[spc_find_employee_asafeies_multi_dates_test]
 	@only_ergani_punches int = 0,
 	@level int = 1,
 	@show_no_karta int = 0,
+	@show_wfh int = 0,
 	@remove_duplicate_missed int = 0,
 	@scenario_name nvarchar(50) = ''
 as
@@ -129,7 +130,8 @@ begin
 		@level = @level, 
 		@codefs = @codefs, 
 		@only_ergani_punches = @only_ergani_punches,
-		@show_no_karta = @show_no_karta, 
+		@show_no_karta = @show_no_karta,
+		@show_wfh = @show_wfh,
 		@scenario_name = @scenario_name;
 
 	set @current_date_time = dateadd(day, 1, @current_date_time);
@@ -165,6 +167,6 @@ begin
 	alter table #sp_res drop column missed_punch_today, missed_punch_yesterday;
 end
 
-select *, scenario_name = @scenario_name from #sp_res order by codef, work_date;
+select */*, scenario_name = @scenario_name*/ from #sp_res order by codef, work_date;
 
 end
